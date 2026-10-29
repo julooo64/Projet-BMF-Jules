@@ -214,6 +214,7 @@ button img{vertical-align:middle;margin-right:8px;border-radius:50%;object-fit:c
 .leaflet-container{font:inherit}
 .club{width:40px;height:40px;border-radius:50%;border:3px solid;background:#fff;overflow:hidden}
 .club img{width:100%;height:100%;object-fit:contain;display:block}
+#map .tl-dark{filter:invert(1) hue-rotate(180deg) brightness(.92) contrast(.9) saturate(.55)}
 #elist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 18px;margin-top:10px;font-size:.92rem}
 #elist b{color:var(--gold)}#elist span{display:block;color:var(--muted)}
 #filt button[aria-pressed="false"]{opacity:.55}
@@ -390,7 +391,7 @@ try{
   const ctr=[LA0,LO0],lim=D.ecoles.find(e=>e.limite),R=KM(ctr,lim.g)*1000;
   const hex=n=>'#'+n.toString(16).padStart(6,'0');
   const map=L.map('map',{scrollWheelZoom:false}).setView(ctr,11);window.__map=map;
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{attribution:'© OpenStreetMap, © CARTO',maxZoom:18,subdomains:'abcd'}).addTo(map);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© les contributeurs d’OpenStreetMap',maxZoom:18,className:'tl-dark'}).addTo(map);
   const G={zone:L.layerGroup().addTo(map),clubs:L.layerGroup().addTo(map),ecoles:L.layerGroup().addTo(map),col:L.layerGroup().addTo(map)};
   L.circle(ctr,{radius:R,color:'#f2c94c',weight:2,dashArray:'7 7',fill:false}).addTo(G.zone);
   D.clubs.forEach(c=>L.marker(c.geo,{title:c.nom,zIndexOffset:500,icon:L.divIcon({className:'',iconSize:[40,40],iconAnchor:[20,20],html:`<div class="club" style="border-color:${hex(c.col)}"><img src="${c.logo}" alt=""></div>`})})
